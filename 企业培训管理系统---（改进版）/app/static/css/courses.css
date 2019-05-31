@@ -1,0 +1,37 @@
+div.course-tabs {
+    margin-top: 16px;
+}
+
+ul.courses {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+}
+
+div.course-tabs ul.course {
+    margin: 0px;
+    border-top: none;
+}
+
+ul.courses li.course {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+ul.courses li.course:hover {
+    background-color: #f0f0f0;
+}
+
+div.course-time {
+    text-align: center;
+}
+
+div.course-title{
+    margin-left: 48px;
+    min-height: 48px;
+}
+
+div.course-footer {
+    text-align: right;
+}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import '_macros.html' as macros %}
+
+{% block title %}详情{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/_comments.css') }}">
+
+{% endblock %}
+{% block main %}
+    {% include '_posts.html' %}
+    <div class="page-title">
+        <h3>Comments</h3>
+    </div>
+    {% if current_user.can(Permission.COMMENT) %}
+        <div class="comment-form">
+            {{ wtf.quick_form(form) }}
+        </div>
+    {% endif %}
+    {% include '_comments.html' %}
+    {% if pagination %}
+        <div class="pagination">
+            {{ macros.pagination_widget(pagination,'main.post',fragment='#comment',id=posts[0].id) }}
+        </div>
+    {% endif %}
+
+{% endblock %}

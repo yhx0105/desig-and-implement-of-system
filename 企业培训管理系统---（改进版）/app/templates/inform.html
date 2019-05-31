@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+
+{% endblock %}
+{% block main %}
+    <div class="page-title">
+        <h1>Hello</h1>
+        {% if current_user.is_authenticated %}
+            <p1>{{ current_user.username }}</p1>
+        {% else %}
+            <p1>Stranger</p1>
+        {% endif %}
+    </div>
+{% endblock %}
+<div>
+    {% if current_user.can(Permission.WRITE_POST) %}
+        {{ wtf.quick_form(form) }}
+    {% endif %}
+</div>
+<ul class=" posts">
+    {% for post in posts %}
+        <li class="post">
+            <div class="post-date">{{ moment(post.timestamp).fromNow() }}
+            </div>
+            <div class="post-author">
+                <a href="{{ url_for('.user',username=post.author.username) }}"></a>
+            </div>
+            <div class="page-title">{{ post.title }}</div>
+            <div class="page-body">{{ post.body }}</div>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+发布课程
+{% endblock %}
+{% block main %}
+<div>
+    {% if current_user.can(Permission.ADMINISTER) %}
+        {{ wtf.quick_form(form) }}
+    {% endif %}
+</div>
+
+{% for course in courses %}
+    <li class="post">
+        <div class="page-coursename">{{ course.coursename }}</div>
+        <div class="page-time">{{ course.time }}</div>
+
+    {% if not current_user.is_course(course) %}
+                    <a href="{{ url_for('main.choose',coursename=course.coursename) }}"
+                       class="btn btn-primary">选课</a>
+                {% else %}
+                    <a href="{{ url_for('main.unchoose',coursename=course.coursename) }}"
+                       class="btn btn-primary">退课</a>
+                {% endif %}
+{% endfor %}
+{% endblock %}

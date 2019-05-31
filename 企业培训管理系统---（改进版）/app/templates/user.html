@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}个人资料{% endblock %}
+{% block main %}
+    <div class="main">
+        <h1>{{ user.username }}</h1>
+        {% if user.name or user.position %}
+            <p>
+                {% if user.name %}{{ user.name }}<br>{% endif %}
+                {% if user.position %}{{ user.position }}{% endif %}
+            </p>
+        {% endif %}
+        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+
+        <p>
+            {% if user==current_user %}
+                <a href="{{ url_for('.edit_profile') }}">编辑资料</a>
+            {% endif %}
+            {% if current_user.is_administrator() %}
+                <a class="btn byn-danger" href="{{ url_for('main.edit_profile_admin',id=user.id) }}">
+                    编辑简介[admin]
+                </a>
+            {% endif %}
+        </p>
+    </div>
+
+
+{% endblock %}
